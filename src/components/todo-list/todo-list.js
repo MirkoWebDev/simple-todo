@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import TodoElement from '../todo-element/todo-element';
+import useGlobal from '../../store/store';
 
 const TodoList = props => {
+    const [state, setstate] = useGlobal();
 const [listElements, setListElements] = useState([
     {title:'Get Groceries',
     duration:'today',
@@ -18,13 +20,8 @@ const [listElements, setListElements] = useState([
 ])
 
 const elementClickedHandler = index =>{
-    const newElement = {
-        title:listElements[index].title,
-        duration: listElements[index].duration,
-        completed: !listElements[index].completed
-    }
     const newArray = [...listElements];
-    newArray[index] = newElement;
+    newArray[index].completed = !newArray[index].completed;
     setListElements(newArray);
 }
     
@@ -42,6 +39,7 @@ const elementClickedHandler = index =>{
                        completed = {el.completed}/>
                    ) )}
             </ul>
+            {state.counter}
             <button onClick={props.adderToggle}>Add ToDo</button>
         </div>
     )

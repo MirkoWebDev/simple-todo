@@ -11,6 +11,14 @@
     z-index: 5;
     background-color: rgba(0, 0, 0, 0.5);
 }
+.addTodoWrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+   
+}
 
 .addTodo{
     display: relative;

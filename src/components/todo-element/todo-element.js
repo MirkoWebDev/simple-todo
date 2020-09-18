@@ -2,7 +2,9 @@ import React from 'react';
 
 
 import './todo-element.css';
-const todoElement = props => {
+const todoElement = React.memo(props => {
+
+    console.log('rendered');
 
     return(
         <li className={`todoElement ${props.completed? "completed" : ""}`}>
@@ -11,7 +13,7 @@ const todoElement = props => {
             <span className="todoDuration">{props.duration}</span>
         </li>
     )
-}
+});
 
 
 export default todoElement;
