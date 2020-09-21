@@ -6,7 +6,7 @@ import TopBar from './UI/top-bar/top-bar';
 import AddTodo from './components/add-todo/add-todo';
 
 function App() {
-  const [adderVisible, setAdderVisible] = useState(false);
+  const [adderVisible, setAdderVisible] = useState(true);
 
 
   return (

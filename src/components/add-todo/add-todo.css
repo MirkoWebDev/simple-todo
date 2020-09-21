@@ -21,7 +21,8 @@
 }
 
 .addTodo{
-    display: relative;
+    display: block;
+    position: relative;
     height: 500px;
     max-height: 80%;
     width: 500px;
@@ -29,4 +30,25 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+.addClose{
+    position: absolute;
+    width: 25px;
+    line-height: 25px;
+    top: 5px;
+    left: 5px;
+    background-color: indianred;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.addTodo input, .addTodo select{
+    display: block;
+    margin: 15px auto;
+}
+
+.addTodo label{
+    margin-top: 30px;;
+    display: block;
 }

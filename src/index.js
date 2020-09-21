@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import configList from './store/listConfig';
+
+configList();
 
 ReactDOM.render(
   <React.StrictMode>
