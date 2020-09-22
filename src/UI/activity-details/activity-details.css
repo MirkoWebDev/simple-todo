@@ -1,0 +1,125 @@
+.detailsWrapper{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 30%;
+    max-width: 300px;
+    border-width: 1px 0 1px 1px;
+    border-color: silver;
+    border-style: solid;
+    box-shadow: -3px -3px 3px rgba(0,0,0,0.5);
+    background-color: white;
+    z-index: 2;
+}
+
+.check, .check:before, .check:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+.check {
+  width: 50px;
+  height: 50px;
+  background: #e5e5e5;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-transform: translateX(0) translateY(0);
+  -ms-transform: translateX(0) translateY(0);
+  -webkit-transform: translateX(0) translateY(0);
+  transform: translateX(0) translateY(0);
+  -moz-box-shadow: 0px -4px 4px 0px rgba(255, 255, 255, 0.75), inset 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 0px -4px 4px 0px rgba(255, 255, 255, 0.75), inset 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px -4px 4px 0px rgba(255, 255, 255, 0.75), inset 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+.check:before {
+  content: "";
+  background: #fff;
+  position: absolute;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  top: 9%;
+  left: 9%;
+  right: 9%;
+  bottom: 9%;
+  -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+}
+.check:after {
+  content: "";
+  position: absolute;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-color: #60b247;
+  border-width: 0;
+  border-style: solid;
+}
+.check .check-icon {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 28%;
+  width: 45%;
+  fill: #e5e5e5;
+}
+.check.completed:after {
+  -moz-transition: ease-out 0.1s all;
+  -o-transition: ease-out 0.1s all;
+  -webkit-transition: ease-out 0.1s all;
+  transition: ease-out 0.1s all;
+  border-width: 25px;
+}
+.check.completed .check-icon {
+  fill: #fff;
+  -moz-animation: bounce 0.2s;
+  -webkit-animation: bounce 0.2s;
+  animation: bounce 0.2s;
+  -moz-animation-delay: 0.08s;
+  -webkit-animation-delay: 0.08s;
+  animation-delay: 0.08s;
+}
+
+@-moz-keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

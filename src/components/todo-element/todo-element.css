@@ -28,6 +28,8 @@
 
 .todoTitle{
     display: block;
+    width: 100%;
+    text-align: center;
     font-size: 130%;
     font-weight: bold;
 }

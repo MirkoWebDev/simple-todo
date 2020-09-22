@@ -1,4 +1,5 @@
 import { initStore } from '../hooks/hook-store';
+import uuid from 'react-uuid';
 
 
 const configureStore = () => {
@@ -13,10 +14,20 @@ const configureStore = () => {
                 ...curState.list[prodIndex],
                 completed: newFavStatus
             };
+            localStorage.setItem('todo', JSON.stringify(updatedProducts));
+
             return { list: updatedProducts }
         },
+        DELETE_ACTIVITY: (curState, elementId) => {
+            const newList = curState.list.filter(
+                el => el.id !== elementId
+            );
+            localStorage.setItem('todo', JSON.stringify(newList));
+
+            return { list: newList }
+        },
         ADD_ACTIVITY:(curState, activityData) => {
-            const newId = '5';
+            const newId = uuid();
             const newElement = {
                 id: newId,
                 title: activityData.title,
@@ -26,38 +37,47 @@ const configureStore = () => {
 
             const newList = [...curState.list];
             newList.push(newElement);
+            localStorage.setItem('todo',JSON.stringify(newList));
             return {list:newList}
         }
     }
 
-    initStore(actions, {
-        list: [
-            {
-                id: '1',
-                title: 'Study React',
-                duration: 'today',
-                completed: false
-            },
-            {
-                id: '2',
-                title: 'Send Resume',
-                duration: 'today',
-                completed: false
-            },
-            {
-                id: '3',
-                title: 'Buy More Coffee',
-                duration: 'today',
-                completed: false
-            },
-            {
-                id: '4',
-                title: 'Destroy My Enemies',
-                duration: 'today',
-                completed: false
-            }
-        ]
-    });
+    const loadedList = localStorage.getItem('todo');
+
+    if(loadedList){
+        console.log(JSON.parse(loadedList));
+        initStore(actions, {list:JSON.parse(loadedList)});
+    }else{
+        initStore(actions, {
+            list: [
+                {
+                    id: '1',
+                    title: 'Study React',
+                    duration: 'today',
+                    completed: false
+                },
+                {
+                    id: '2',
+                    title: 'Send Resume',
+                    duration: 'today',
+                    completed: false
+                },
+                {
+                    id: '3',
+                    title: 'Buy More Coffee',
+                    duration: 'today',
+                    completed: false
+                },
+                {
+                    id: '4',
+                    title: 'Destroy My Enemies',
+                    duration: 'today',
+                    completed: false
+                }
+            ]
+        });
+    }
+    
 }
 
 export default configureStore;

@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import configList from './store/listConfig';
+import configDetail from './store/detailConfig';
 
 configList();
+configDetail();
 
 ReactDOM.render(
   <React.StrictMode>
