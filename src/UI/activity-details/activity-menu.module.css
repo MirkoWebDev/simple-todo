@@ -1,0 +1,28 @@
+.MenuList{
+    width: 100%;
+    background-color: #F5F5F5;
+}
+.MenuList ul{
+    list-style: none;
+    padding: 20px 5px;
+}
+.MenuList li{
+    background-color: white;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 10px 5px;
+    cursor: pointer;
+}
+.MenuList ul li:last-of-type{
+    border-bottom: 0;
+}
+.MenuList li:hover{
+    background-color: #EBEBEB;
+}
+
+.MenuListGroup{
+    display: block;
+    margin: 10px 0;
+    border: 1px solid #E0E0E0;
+    border-radius: 2px;
+}
+

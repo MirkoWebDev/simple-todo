@@ -1,40 +1,55 @@
 import React, {useState} from 'react';
 import {useStore} from  '../../hooks/hook-store';
+import uuid from 'react-uuid';
 
 import './add-todo.css';
 
 
 const AddTodo = props => {
 const  dispatch = useStore(false)[1];
-const [activtyName, setactivtyName] = useState('');
-const [duration, setduration] = useState('');
+const [activtyName, setActivtyName] = useState('');
+const [duration, setDuration] = useState('today');
+const [repeat, setRepeat] = useState(null);
 
-const addActivityHandler = () =>{
-    dispatch('ADD_ACTIVITY', {title:activtyName,duration: duration});
-    props.adderToggle();
+
+const onKeyPress = event => {
+    console.log(event.key);
+    if(event.key === 'Enter'){
+        addActivityHander();
+    }
 }
+const addActivityHander = () => {
+    if(!activtyName){
+        document.getElementById('activityInput').focus();
+    }else{
+        dispatch('ADD_ACTIVITY',{
+            id:uuid(),
+            title:activtyName,
+            duration:duration,
+            repeat:repeat
+        })
+    }
+}
+
 
     return(
         <div className="addTodoWrapper" >
-            <div className="addtoWrapperCloser" onClick={props.adderToggle}></div>
-            <div className="addTodo">
-                <span className="addClose" onClick={props.adderToggle}>X</span>
-                <label>New Activity Name</label>
-                <input type="text" 
-                placeholder="Insert name" 
-                value={activtyName} 
-                onChange={element => setactivtyName(element.target.value)}
-                />
-                <label>Expire date</label>
-                <select
-                    value = {duration}
-                    onChange={element => setduration(element.target.value)}
-                >
-                    <option>Select Option</option>
-                    <option value="today">Today</option>
-                </select>
-                <button onClick={addActivityHandler}>Add new Activity</button>
-            </div>
+            <span onClick={addActivityHander} className="material-icons adderIcon">
+                done
+            </span>
+            <input id="activityInput" 
+            type="text" 
+            placeholder="Add Activity"
+            value={activtyName} 
+            onChange={event => {setActivtyName(event.target.value)}} 
+            onKeyPress={onKeyPress}/>
+            <span className="material-icons">
+                alarm
+            </span>
+            <span className="material-icons">
+                history
+            </span>
+              
         </div>
     )
 }

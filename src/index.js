@@ -5,9 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import configList from './store/listConfig';
 import configDetail from './store/detailConfig';
+import configContext from './store/contextMenuConfig';
+import configModal from './store/modalConfig';
+
 
 configList();
 configDetail();
+configContext();
+configModal();
 
 ReactDOM.render(
   <React.StrictMode>

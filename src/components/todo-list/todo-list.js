@@ -5,9 +5,6 @@ import {useStore} from '../../hooks/hook-store';
 const TodoList = props => {
 
 const state = useStore()[0];
-console.log(state)
-    
-
     return(
         <div>
             <ul>
@@ -21,7 +18,6 @@ console.log(state)
                     />
                    ) )}
             </ul>
-            <button onClick={props.adderToggle}>Add ToDo</button>
         </div>
     )
 }

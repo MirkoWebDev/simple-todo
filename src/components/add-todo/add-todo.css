@@ -2,53 +2,38 @@
     position: fixed;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    top: 0;
+    justify-content: center;
+    bottom: 0;
     left: 0;
-    height: 100%;
+    right: 0;
     width: 100%;
-    overflow: hidden;
-    z-index: 5;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-.addTodoWrapper{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-   
-}
-
-.addTodo{
-    display: block;
-    position: relative;
-    height: 500px;
-    max-height: 80%;
-    width: 500px;
-    max-width: 90%;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    text-align: center;
-}
-.addClose{
-    position: absolute;
-    width: 25px;
-    line-height: 25px;
-    top: 5px;
-    left: 5px;
-    background-color: indianred;
+    max-width: 500px;
+    margin: 0 auto;
+    z-index: 3;
+    background-color: #0077b6;
     color: white;
-    border-radius: 50%;
+}
+.addTodoWrapper *{
+    padding: 10px 5px;
+}
+.addTodoWrapper span:hover{
     cursor: pointer;
-}
-.addTodo input, .addTodo select{
-    display: block;
-    margin: 15px auto;
-}
+    background-color: rgba(255, 255, 255, 0.3);
 
-.addTodo label{
-    margin-top: 30px;;
-    display: block;
+}
+.addTodoWrapper input{
+    width: 70%;
+    border: none;
+    background-color: #0077b6;
+    color: white;
+}
+.addTodoWrapper input:focus{
+    border: none;
+}
+.addTodoWrapper input::placeholder{
+    color: white;
+}
+.adderIcon{
+}
+.adderIcon:hover{
 }

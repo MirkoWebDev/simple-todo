@@ -1,18 +1,62 @@
 .detailsWrapper{
     position: fixed;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
     top: 0;
-    right: 0;
+    right: -100%;
     height: 100vh;
-    width: 30%;
+    width: 100%;
     max-width: 300px;
     border-width: 1px 0 1px 1px;
     border-color: silver;
     border-style: solid;
     box-shadow: -3px -3px 3px rgba(0,0,0,0.5);
     background-color: white;
-    z-index: 2;
+    transition: all 0.3s;
+    text-align: center;
+    z-index: 5;
+}
+.detailsWrapper.visible{
+  opacity: 1;
+  visibility: visible;
+  right: 0;
 }
 
+.activityCloser,.activityDeleter{
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    transform: rotateZ(180deg);
+    font-size: 200%;
+    cursor: pointer;
+}
+.activityCloser:hover,.activityDeleter:hover{
+  background-color: rgba(240, 240, 240, 1);
+}
+.activityDeleter{
+  right: 5px;
+  left: unset;
+  transform: rotateZ(0);
+  color: indianred;
+
+}
+.btn{
+  cursor: pointer;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: 110%;
+  background-color: #e8db7d;
+  color: white;
+  margin: 10px;
+}
+.btnDanger{
+  background-color: #e71d36;
+}
+.btnDanger:hover{
+  background-color: #ec465a;
+}
 .check, .check:before, .check:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -21,8 +65,10 @@
 
 
 .check {
-  width: 50px;
-  height: 50px;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 5px;
   background: #e5e5e5;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -78,7 +124,7 @@
   -o-transition: ease-out 0.1s all;
   -webkit-transition: ease-out 0.1s all;
   transition: ease-out 0.1s all;
-  border-width: 25px;
+  border-width: 15px;
 }
 .check.completed .check-icon {
   fill: #fff;

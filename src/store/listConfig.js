@@ -52,26 +52,19 @@ const configureStore = () => {
             list: [
                 {
                     id: '1',
-                    title: 'Study React',
-                    duration: 'today',
-                    completed: false
+                    title: 'Study React',                                      completed: false
                 },
                 {
                     id: '2',
-                    title: 'Send Resume',
-                    duration: 'today',
-                    completed: false
+                    title: 'Send Resume',                                     completed: false
                 },
                 {
                     id: '3',
-                    title: 'Buy More Coffee',
-                    duration: 'today',
-                    completed: false
+                    title: 'Buy More Coffee',                                     completed: false
                 },
                 {
                     id: '4',
-                    title: 'Destroy My Enemies',
-                    duration: 'today',
+                    title: 'Destroy My Enemies',  
                     completed: false
                 }
             ]
