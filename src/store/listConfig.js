@@ -19,10 +19,12 @@ const configureStore = () => {
             return { list: updatedProducts }
         },
         DELETE_ACTIVITY: (curState, elementId) => {
+            console.log(elementId);
             const newList = curState.list.filter(
                 el => el.id !== elementId
             );
-            localStorage.setItem('todo', JSON.stringify(newList));
+            console.log(newList);
+            //localStorage.setItem('todo', JSON.stringify(newList));
 
             return { list: newList }
         },

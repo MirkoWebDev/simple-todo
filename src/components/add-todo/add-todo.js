@@ -13,7 +13,6 @@ const [repeat, setRepeat] = useState(null);
 
 
 const onKeyPress = event => {
-    console.log(event.key);
     if(event.key === 'Enter'){
         addActivityHander();
     }
@@ -22,6 +21,7 @@ const addActivityHander = () => {
     if(!activtyName){
         document.getElementById('activityInput').focus();
     }else{
+        setActivtyName('');
         dispatch('ADD_ACTIVITY',{
             id:uuid(),
             title:activtyName,

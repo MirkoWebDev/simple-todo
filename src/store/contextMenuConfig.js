@@ -6,30 +6,18 @@ import { initStore } from '../hooks/hook-store';
 const configureMenu = () => {
 
     const actions = {
-        CREATE_CONTEXT: (curState,newElements) => {
+        SET_CONTEXT_ID: (curState,newID) => {
     
-            return { contextElements: newElements }
+            return { contextID: newID }
         },
         SET_CONTEXT_COORDINATES: (curState,coordinates) => {
     
             return { contextCoordinates: {xPos:coordinates.x,yPos:coordinates.y} }
-        },
-        TOGGLE_CONTEXT: curState => {
-            const newState = !curState.contextVisible;
-            return { contextVisible: newState}
         }
     }
 
     initStore(actions, {contextVisible:false,
-        contextElements: [{
-            textContent:(
-                <span style={{display:'flex'}}>
-                    <span className="material-icons">delete_outline</span>
-                    <span>Delete</span>
-                </span>
-            ),
-            id:null
-        }],
+        contextID:null,
         contextCoordinates:{
             xPos: 0,
             yPos: 0

@@ -1,51 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useStore} from '../../hooks/hook-store';
-
+import ContextualMenu from '../../UI/contextual-menu/contextual-menu'
 
 import './todo-element.css';
 const TodoElement = props => {
+
+
+const [showContext, setShowContext] = useState(false);
 const dispatch = useStore(false)[1];
 
 const toggleCompletedHandler = () => {
     dispatch('TOGGLE_COMPLETED', props.id);
 }
 const toggleDeleteHandler = () => {
-    dispatch('DELETE_ACTIVITY', {
-        id: props.id,
-        title:props.title,
-        completed: props.completed
-    });
+    dispatch('SET_CONTEXT_ID', null);
+    dispatch('DELETE_ACTIVITY', props.id);
 }
 const toggleActivityDetail = () =>{
     dispatch('ACTIVITY_DETAIL',props.id);
     dispatch('TOGGLE_DETAILS');
+    console.log(props.id);
 }
-    const contextHandler = (event) => {
+const contextHandler = (event) => {
+    
         event.preventDefault();
-
-        const xPos = event.pageX+ "px";
-        const yPos = event.pageY + "px";
-
-
-        dispatch('CREATE_CONTEXT', 
-            [
-                {
-                    textContent: (
-                        <span style={{ display: 'flex' }}>
-                            <span className="material-icons">delete</span>
-                            <span>Delete</span>
-                        </span>
-                    ),
-                    id: props.id,
-                    elementFunction: (f) => { f() }
-                }
-        ])
-        dispatch('SET_CONTEXT_COORDINATES', { x: xPos, y: yPos });
-        dispatch('TOGGLE_CONTEXT');
-
+        if(showContext){
+            setShowContext(false);
+        }else{
+            const xPos = event.pageX + "px";
+            const yPos = event.pageY + "px";
+            dispatch('SET_CONTEXT_COORDINATES', { x: xPos, y: yPos });
+            setShowContext(true);
+        }
     };
+
     
     return(
+        <React.Fragment>
         <li className={`todoElement ${props.completed? "completed" : ""}`} onContextMenu={contextHandler}>
             <div
                 className={`check ${props.completed ? "completed" : ""}`}
@@ -58,6 +49,13 @@ const toggleActivityDetail = () =>{
             <span className="todoTitle" onClick={toggleActivityDetail}>{props.title}</span>
             
         </li>
+        {showContext ? 
+            <ContextualMenu closing={contextHandler}>
+                <li onClick={toggleDeleteHandler}>Delete</li>
+            </ContextualMenu>
+        :null}
+        
+        </React.Fragment>
     )
 };
 
