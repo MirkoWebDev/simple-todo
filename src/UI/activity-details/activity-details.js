@@ -1,30 +1,32 @@
 import React, {useState} from 'react';
 import {useStore} from '../../hooks/hook-store';
 
+import ContextMenu from '../contextual-menu/contextual-menu';
 
 import menuClasses from './activity-menu.module.css';
 import './activity-details.css';
 const ActivityDetails = props => {
 
     const [state,dispatch] = useStore();
-    const [deleteConfirmation, setdeleteConfirmation] = useState(false)
     const activitySelected = state.list[state.list.findIndex(el => el.id === state.activityID)];
+    const [repeatContext, setRepeatContext] = useState(false)
 
 
 
     const deleteActivityHandler = () =>{
-        setdeleteConfirmation(false);
         dispatch('TOGGLE_DETAILS');
-        dispatch('DELETE_ACTIVITY', activitySelected.id);
+        dispatch('TOGGLE_MODAL');
     }
 
-    const deleteConfirm = (
-        <div className='deleteConfirmation'>
-            <p>Delete Activity?</p>
-            <button className='btn btnDanger' onClick={deleteActivityHandler}>Confirm</button>
-            <button className='btn' onClick={() => {setdeleteConfirmation(false)}}>Cancel</button>
-        </div>
-    );
+
+    const repeatContextHandler = (event) => {
+        const xPos = "10%";
+        const yPos = (event.pageY+13) + "px";
+        console.log('x:' + xPos + ' y: ' + yPos);
+
+        dispatch('SET_CONTEXT_COORDINATES', { x: xPos, y: yPos });
+        setRepeatContext(true);
+    }
 
     return(
         <div className={`detailsWrapper ${state.detailsVisible? "visible" : null}`}>
@@ -44,7 +46,7 @@ const ActivityDetails = props => {
                     <div className={menuClasses.MenuList}>
                         <ul>
                             <span className={menuClasses.MenuListGroup}>
-                                <li>Temp</li>
+                                <li onClick={repeatContextHandler} title="Repeat"> <span className="material-icons">history</span>Repeat</li>
                                 <li>Temp</li>
                             </span>
                             <span className={menuClasses.MenuListGroup}>
@@ -57,12 +59,21 @@ const ActivityDetails = props => {
                     </div>
                         
                 <p>Expiration {activitySelected.duration}</p>
+
+                {repeatContext? 
+                        <ContextMenu closing={() => { setRepeatContext(false) }}>
+                            <li>Day (Default)</li>
+                            <li>Every Other Day</li>
+                            <li>Weekly</li>
+                            <li>Every Other Week</li>
+                            <li>Montly</li>
+                        </ContextMenu>
+                :null}
                 </React.Fragment> : null }
 
-                <span className="activityDeleter material-icons" onClick={() => { setdeleteConfirmation(true); }}>delete_outline</span>
+                <span className="activityDeleter material-icons" onClick={deleteActivityHandler}>delete_outline</span>
                 <span className="activityCloser material-icons" onClick={() => { dispatch('TOGGLE_DETAILS'); }}>keyboard_arrow_left</span>
             </div>
-            {deleteConfirmation ? deleteConfirm : null}
         </div>
        
     )

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 
 import {useStore} from './hooks/hook-store';
@@ -6,31 +6,23 @@ import TodoList from './components/todo-list/todo-list';
 import TopBar from './UI/top-bar/top-bar';
 import AddTodo from './components/add-todo/add-todo';
 import ActivityDetails from './UI/activity-details/activity-details';
-import ContextMenu from './UI/contextual-menu/contextual-menu';
-import Modal from './UI/Modal/modal';
+import DeleteConfirmation from './components/menu/delete-confirmation/delete-confirmation';
 
 function App() {
   const state = useStore()[0];
 
 
   return (
-    <div>
-      {state.contextVisible ? 
-      <ContextMenu />
-         : null}
-      {state.modalVisible? 
-        <Modal>
-
-        </Modal> 
-      : null}
-      
+    <React.Fragment>   
       <TopBar />
       <TodoList />
 
       <ActivityDetails />
       <AddTodo /> 
    
-    </div>
+      <DeleteConfirmation />
+
+    </React.Fragment>
   );
 }
 

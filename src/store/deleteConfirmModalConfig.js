@@ -10,7 +10,7 @@ const configureModal = () => {
         }
     }
 
-    initStore(actions, { modalVisible:false });
+    initStore(actions, { modalVisible:false});
 
 }
 

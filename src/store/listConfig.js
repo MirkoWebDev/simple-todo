@@ -24,7 +24,7 @@ const configureStore = () => {
                 el => el.id !== elementId
             );
             console.log(newList);
-            //localStorage.setItem('todo', JSON.stringify(newList));
+            localStorage.setItem('todo', JSON.stringify(newList));
 
             return { list: newList }
         },

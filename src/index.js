@@ -6,13 +6,13 @@ import * as serviceWorker from './serviceWorker';
 import configList from './store/listConfig';
 import configDetail from './store/detailConfig';
 import configContext from './store/contextMenuConfig';
-import configModal from './store/modalConfig';
+import configDeleteModal from './store/deleteConfirmModalConfig';
 
 
 configList();
 configDetail();
 configContext();
-configModal();
+configDeleteModal();
 
 ReactDOM.render(
   <React.StrictMode>

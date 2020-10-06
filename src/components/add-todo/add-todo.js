@@ -5,12 +5,12 @@ import uuid from 'react-uuid';
 import './add-todo.css';
 
 
+
 const AddTodo = props => {
 const  dispatch = useStore(false)[1];
 const [activtyName, setActivtyName] = useState('');
 const [duration, setDuration] = useState('today');
 const [repeat, setRepeat] = useState(null);
-
 
 const onKeyPress = event => {
     if(event.key === 'Enter'){
@@ -32,25 +32,26 @@ const addActivityHander = () => {
 }
 
 
+
     return(
-        <div className="addTodoWrapper" >
-            <span onClick={addActivityHander} className="material-icons adderIcon">
-                done
+            <div className="addTodoWrapper" >
+                <span onClick={addActivityHander} className="material-icons adderIcon">
+                    done
             </span>
-            <input id="activityInput" 
-            type="text" 
-            placeholder="Add Activity"
-            value={activtyName} 
-            onChange={event => {setActivtyName(event.target.value)}} 
-            onKeyPress={onKeyPress}/>
-            <span className="material-icons">
-                alarm
+                <input id="activityInput"
+                    type="text"
+                    placeholder="Add Activity"
+                    value={activtyName}
+                    onChange={event => { setActivtyName(event.target.value) }}
+                    onKeyPress={onKeyPress} />
+                <span className="material-icons">
+                    alarm
             </span>
-            <span className="material-icons">
-                history
+                <span className="material-icons" title="Repeat">
+                    history
             </span>
-              
-        </div>
+            </div>
+       
     )
 }
 

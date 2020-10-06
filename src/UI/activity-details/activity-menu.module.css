@@ -1,6 +1,7 @@
 .MenuList{
     width: 100%;
     background-color: #F5F5F5;
+    text-align: left;
 }
 .MenuList ul{
     list-style: none;
@@ -11,6 +12,9 @@
     border-bottom: 1px solid #E0E0E0;
     padding: 10px 5px;
     cursor: pointer;
+}
+.MenuList li span{
+    margin-right: 10%;
 }
 .MenuList ul li:last-of-type{
     border-bottom: 0;
