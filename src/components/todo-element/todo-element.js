@@ -7,19 +7,27 @@ const TodoElement = props => {
 
 
 const [showContext, setShowContext] = useState(false);
-const dispatch = useStore(false)[1];
+const [state,dispatch] = useStore(false);
 
 const toggleCompletedHandler = () => {
     dispatch('TOGGLE_COMPLETED', props.id);
 }
 const toggleDeleteHandler = () => {
-    dispatch('SET_CONTEXT_ID', null);
-    dispatch('DELETE_ACTIVITY', props.id);
+    setShowContext(false);
+    dispatch('ACTIVITY_DETAIL', props.id);
+    dispatch('TOGGLE_MODAL');
 }
 const toggleActivityDetail = () =>{
-    dispatch('ACTIVITY_DETAIL',props.id);
-    dispatch('TOGGLE_DETAILS');
-    console.log(props.id);
+    if (state.activityID) {
+        if(state.activityID === props.id){
+            dispatch('TOGGLE_DETAILS');
+        }else{
+            dispatch('ACTIVITY_DETAIL', props.id);
+        }
+    } else {
+        dispatch('ACTIVITY_DETAIL', props.id);
+        dispatch('TOGGLE_DETAILS');
+    }
 }
 const contextHandler = (event) => {
     

@@ -10,6 +10,7 @@ const activitySelected = state.list[state.list.findIndex(el => el.id === state.a
 
 const deleteActivityHandler = () => {
     dispatch('DELETE_ACTIVITY', state.activityID);
+    dispatch('ACTIVITY_DETAIL', null);
     dispatch('TOGGLE_MODAL');
 }
 
@@ -20,7 +21,8 @@ const deleteActivityHandler = () => {
 
             </div>
             <div className={classes.DeleteConfirmationModal}>
-                <h2>Delete {state.activityID? activitySelected.title: null}?</h2>
+                <h2>Delete Activity</h2>
+                    <p>This will delete "{state.activityID ? activitySelected.title : null}"</p>
                 <button className={classes.DeleteButtonCancel} onClick={() => { dispatch('TOGGLE_MODAL')}}>Cancel</button>
                 <button className={classes.DeleteButtonDelete} onClick={deleteActivityHandler}>Delete</button>
             </div>

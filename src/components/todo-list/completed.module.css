@@ -1,0 +1,14 @@
+.Arrow{
+    transition: transform 0.2s;
+}
+
+.ArrowTurn{
+    transform: rotateZ(90deg);
+}
+
+.CompletedList{
+    display: none;
+}
+.CompletedList.ListActive{
+    display: block;
+}

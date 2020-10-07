@@ -1,4 +1,3 @@
-import React from 'react';
 import { initStore } from '../hooks/hook-store';
 
 /* In This */
