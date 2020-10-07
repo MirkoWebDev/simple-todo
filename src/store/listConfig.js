@@ -46,28 +46,58 @@ const configureStore = () => {
 
     const loadedList = localStorage.getItem('todo');
 
+    /* Configuring the list of activites:
+    IF there is data saved on the local storage, load that : ELSE load starting list */
+
     if(loadedList){
         console.log(JSON.parse(loadedList));
         initStore(actions, {list:JSON.parse(loadedList)});
+        console.log(new Date('d-m-yy'))
     }else{
+
+        /*initialize basic Todo list (array of objects)
+
+        each object in list contains:
+        id: unique Id created with UUID,
+        title: The name of the to do element,
+        completed: The element has been marked as completed?,
+        completedDate: when the element has been marked as completed,
+        repeat: how often the Todo should be repeated defauld is everyday,
+        plannedFor: for which day the ToDo is needed, default is today
+        */
         initStore(actions, {
             list: [
                 {
-                    id: '1',
-                    title: 'Study React',                                      completed: false
+                    id: uuid(),
+                    title: 'Study React',
+                    completed: false,
+                    completedDate: null,
+                    repeat:1,
+                    plannedFor:null
                 },
                 {
-                    id: '2',
-                    title: 'Send Resume',                                     completed: false
+                    id: uuid(),
+                    title: 'Send Resume',
+                    completed: false,
+                    completedDate: null,
+                    repeat:1,
+                    plannedFor:null                         
                 },
                 {
-                    id: '3',
-                    title: 'Buy More Coffee',                                     completed: false
+                    id: uuid(),
+                    title: 'Buy More Coffee',
+                    completed: false,
+                    completedDate: null,
+                    repeat:1,
+                    plannedFor:null
                 },
                 {
-                    id: '4',
-                    title: 'Destroy My Enemies',  
-                    completed: false
+                    id: uuid(),
+                    title: 'Destroy My Enemies',
+                    completed: false,
+                    completedDate: null,
+                    repeat:1,
+                    plannedFor:null
                 }
             ]
         });

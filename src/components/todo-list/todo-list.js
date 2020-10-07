@@ -37,7 +37,7 @@ let completed = state.list.filter(el => el.completed).map((el, index) =>
                 {completed.length > 0? 
                 
                 <div>
-                    <button onClick={()=>{setShowCompleted(!showCompleted)}}>
+                    <button className={completedClasses.CompletedButton} onClick={()=>{setShowCompleted(!showCompleted)}}>
                         <span className={`material-icons ${completedClasses.Arrow} ${showCompleted? completedClasses.ArrowTurn:null}`}>
                             keyboard_arrow_right
                         </span> 
