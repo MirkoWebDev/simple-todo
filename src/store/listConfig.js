@@ -5,14 +5,21 @@ import uuid from 'react-uuid';
 const configureStore = () => {
     const actions = {
         TOGGLE_COMPLETED: (curState, productId) => {
+            const updatedProducts = [...curState.list];
+            const nDate = new Date();
             const prodIndex = curState.list.findIndex(
                 p => p.id === productId
             );
-            const newFavStatus = !curState.list[prodIndex].completed;
-            const updatedProducts = [...curState.list];
+            const newCompletedStatus = !curState.list[prodIndex].completed;
+            let newCompletedDate = null;
+            if(newCompletedStatus){
+                nDate.setDate(nDate.getDate()+updatedProducts[prodIndex].repeat)
+                newCompletedDate = nDate.getFullYear() + '-' + nDate.getMonth() + '-' + nDate.getDate();
+            }
             updatedProducts[prodIndex] = {
                 ...curState.list[prodIndex],
-                completed: newFavStatus
+                completed: newCompletedStatus,
+                completedDate: newCompletedDate
             };
             localStorage.setItem('todo', JSON.stringify(updatedProducts));
 
@@ -47,12 +54,25 @@ const configureStore = () => {
     const loadedList = localStorage.getItem('todo');
 
     /* Configuring the list of activites:
-    IF there is data saved on the local storage, load that : ELSE load starting list */
+    IF there is data saved on the local storage, load that : ELSE load starting list 
+    IF any activity is saved as completed check IF completed date is < Current Date IF is, set completed as false, set completed date as null*/
 
     if(loadedList){
-        console.log(JSON.parse(loadedList));
-        initStore(actions, {list:JSON.parse(loadedList)});
-        console.log(new Date('d-m-yy'))
+        const currDate = new Date();
+        const currFullDate = currDate.getFullYear() + '-' + currDate.getMonth() + '-' + currDate.getDate();
+        const parsedList = JSON.parse(loadedList);
+        for (let le of parsedList){
+            if(le.completed && le.completedDate < currFullDate){
+                const index = parsedList.indexOf(le);
+                parsedList[index] = {
+                    ...parsedList[index],
+                    completed: false,
+                    completedDate: null
+                }
+            }
+        }
+        console.log(parsedList);
+        initStore(actions, {list:parsedList});
     }else{
 
         /*initialize basic Todo list (array of objects)
@@ -62,7 +82,7 @@ const configureStore = () => {
         title: The name of the to do element,
         completed: The element has been marked as completed?,
         completedDate: when the element has been marked as completed,
-        repeat: how often the Todo should be repeated defauld is everyday,
+        repeat: how often the Todo should be repeated default is everyday,
         plannedFor: for which day the ToDo is needed, default is today
         */
         initStore(actions, {
@@ -72,7 +92,7 @@ const configureStore = () => {
                     title: 'Study React',
                     completed: false,
                     completedDate: null,
-                    repeat:1,
+                    repeat:0,
                     plannedFor:null
                 },
                 {
@@ -80,7 +100,7 @@ const configureStore = () => {
                     title: 'Send Resume',
                     completed: false,
                     completedDate: null,
-                    repeat:1,
+                    repeat:0,
                     plannedFor:null                         
                 },
                 {
@@ -88,7 +108,7 @@ const configureStore = () => {
                     title: 'Buy More Coffee',
                     completed: false,
                     completedDate: null,
-                    repeat:1,
+                    repeat:6,
                     plannedFor:null
                 },
                 {
@@ -96,7 +116,7 @@ const configureStore = () => {
                     title: 'Destroy My Enemies',
                     completed: false,
                     completedDate: null,
-                    repeat:1,
+                    repeat:0,
                     plannedFor:null
                 }
             ]

@@ -1,6 +1,6 @@
 /*
 
-- Check Re-renders and resources
+- Check Re-renders and resources (to-do element done)
 - Reset completion on change day
 - Set Repeat Time
 - Reset To Do Based on Repeat Time

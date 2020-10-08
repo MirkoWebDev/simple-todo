@@ -10,7 +10,7 @@ const AddTodo = props => {
 const  dispatch = useStore(false)[1];
 const [activtyName, setActivtyName] = useState('');
 const [duration, setDuration] = useState('today');
-const [repeat, setRepeat] = useState(null);
+const [repeat, setRepeat] = useState(1);
 
 const onKeyPress = event => {
     if(event.key === 'Enter'){
@@ -25,10 +25,17 @@ const addActivityHander = () => {
         dispatch('ADD_ACTIVITY',{
             id:uuid(),
             title:activtyName,
-            duration:duration,
-            repeat:repeat
+            completed: false,
+            completedDate: null,
+            repeat: repeat,
+            plannedFor: null 
         })
     }
+}
+
+const repeatHandler = repNr => {
+
+    
 }
 
 

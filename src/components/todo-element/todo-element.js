@@ -5,11 +5,9 @@ import ContextualMenu from '../../UI/contextual-menu/contextual-menu'
 import './todo-element.css';
 const TodoElement = React.memo(props => {
 
-    console.log('Rendered: ' + props.title)
-
 
 const [showContext, setShowContext] = useState(false);
-const [state,dispatch] = useStore(false);
+const dispatch = useStore(false)[1];
 
 const toggleCompletedHandler = () => {
     dispatch('TOGGLE_COMPLETED', props.id);
