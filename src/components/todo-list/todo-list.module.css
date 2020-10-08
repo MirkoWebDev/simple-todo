@@ -1,3 +1,9 @@
+.TodoWrapper{
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
 .CompletedButton{
     padding: 10px 20px;
     background-color: #0077b6;

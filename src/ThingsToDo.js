@@ -1,6 +1,5 @@
 /*
 
-- wrap to do elements in parent, set to do elements max size from parent
 - Check Re-renders and resources
 - Reset completion on change day
 - Set Repeat Time

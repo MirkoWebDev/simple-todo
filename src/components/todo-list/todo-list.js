@@ -2,33 +2,48 @@ import React, {useState} from 'react';
 import TodoElement from '../todo-element/todo-element';
 import {useStore} from '../../hooks/hook-store';
 
-import completedClasses from './completed.module.css';
+import classes from './todo-list.module.css';
 
 const TodoList = props => {
 
-const state = useStore()[0];
-const [showCompleted, setShowCompleted] = useState(false);
+const [state, dispatch] = useStore();
+const [showCompleted, setShowCompleted] = useState(true);
 
-let completed = state.list.filter(el => el.completed).map((el, index) => 
+const actvitiDetailHandler = id =>{
+    if (state.activityID) {
+        if (state.activityID === id) {
+            dispatch('TOGGLE_DETAILS');
+        } else {
+            dispatch('ACTIVITY_DETAIL',id);
+        }
+    } else {
+        dispatch('ACTIVITY_DETAIL',id);
+        dispatch('TOGGLE_DETAILS');
+    }
+}
+
+let completed = state.list.filter(el => el.completed).map(el => 
                 <TodoElement
-                    key={index}
+                    key={el.id}
                     id={el.id}
                     title={el.title}
                     duration={el.duration}
                     completed={el.completed}
+                    detailCall={() => {actvitiDetailHandler(el.id)}}
                 />
     );
     return(
-        <div>
+        <div className={classes.TodoWrapper}>
             <ul>
-                {state.list.filter(el => !el.completed).map((el, index) =>
+                {state.list.filter(el => !el.completed).map(el =>
 
                             <TodoElement
-                                key={index}
+                                key={el.id}
                                 id={el.id}
                                 title={el.title}
                                 duration={el.duration}
                                 completed={el.completed}
+                                detailCall={() => { actvitiDetailHandler(el.id)}}
                             />
  
                 )}
@@ -37,13 +52,13 @@ let completed = state.list.filter(el => el.completed).map((el, index) =>
                 {completed.length > 0? 
                 
                 <div>
-                    <button className={completedClasses.CompletedButton} onClick={()=>{setShowCompleted(!showCompleted)}}>
-                        <span className={`material-icons ${completedClasses.Arrow} ${showCompleted? completedClasses.ArrowTurn:null}`}>
+                    <button className={classes.CompletedButton} onClick={()=>{setShowCompleted(!showCompleted)}}>
+                        <span className={`material-icons ${classes.Arrow} ${showCompleted? classes.ArrowTurn:null}`}>
                             keyboard_arrow_right
                         </span> 
                         Completed</button>
 
-                    <ul className={`${completedClasses.CompletedList} ${showCompleted? completedClasses.ListActive:null}`}>
+                    <ul className={`${classes.CompletedList} ${showCompleted? classes.ListActive:null}`}>
                         {completed}
                     </ul>
                 </div>
