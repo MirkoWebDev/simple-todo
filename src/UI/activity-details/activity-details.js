@@ -9,9 +9,9 @@ const ActivityDetails = props => {
 
     const [state,dispatch] = useStore();
     const activitySelected = state.list[state.list.findIndex(el => el.id === state.activityID)];
-    const [repeatContext, setRepeatContext] = useState(false)
-
-
+    const [repeatContext, setRepeatContext] = useState(false);
+    const [note, setNote] = useState(null)
+    let menuRepeatText = 'Repeat';
 
     const deleteActivityHandler = () =>{
         dispatch('TOGGLE_DETAILS');
@@ -23,10 +23,43 @@ const ActivityDetails = props => {
         const xPos = "10%";
         const yPos = (event.pageY+13) + "px";
         console.log('x:' + xPos + ' y: ' + yPos);
-
         dispatch('SET_CONTEXT_COORDINATES', { x: xPos, y: yPos });
         setRepeatContext(true);
     }
+
+    const repeatSettingHandler = repeatData => {
+        dispatch('SET_REPEAT',{id:activitySelected.id, repeat:repeatData});
+        setRepeatContext(false);
+    }
+
+    const repeatSettingText = () => {
+        switch (activitySelected.repeat) {
+            case 1:
+                menuRepeatText = 'Repeat every other day';
+                break;
+            case 6:
+                menuRepeatText = 'Repeat every week';
+                break;
+            case 13:
+                menuRepeatText = 'Repeat every two weeks';
+                break;
+            case 29:
+                menuRepeatText = 'Repeat every month';
+                break;
+            default: 
+                menuRepeatText = 'Repeat';
+                break;
+        }
+    }
+
+    const noteHandler = (e) =>{
+        setNote(e.target.value);
+    }
+
+    if(activitySelected &&activitySelected.repeat){
+        repeatSettingText();
+    }
+
 
     return(
         <div className={`detailsWrapper ${state.detailsVisible? "visible" : null}`}>
@@ -46,14 +79,15 @@ const ActivityDetails = props => {
                     <div className={menuClasses.MenuList}>
                         <ul>
                             <span className={menuClasses.MenuListGroup}>
-                                <li onClick={repeatContextHandler} title="Repeat"> <span className="material-icons">history</span>Repeat</li>
-                                <li>Temp</li>
+                                <li onClick={repeatContextHandler} title="Repeat">
+                                    <span className="material-icons">history</span>
+                                    {menuRepeatText}
+                                </li>
+                                <li>Rename</li>
+                                <li>Delete</li>
                             </span>
                             <span className={menuClasses.MenuListGroup}>
-                                <li>Temp</li>
-                                <li>Temp</li>
-                                <li>Temp</li>
-                                <li>Temp</li>
+                                <textarea maxLength="250" placeholder="Add Note..." defaultValue={activitySelected.note? activitySelected.note:null} onChange={noteHandler}/>
                             </span>
                         </ul>
                     </div>
@@ -62,11 +96,11 @@ const ActivityDetails = props => {
 
                 {repeatContext? 
                         <ContextMenu closing={() => { setRepeatContext(false) }}>
-                            <li>Day (Default)</li>
-                            <li>Every Other Day</li>
-                            <li>Weekly</li>
-                            <li>Every Other Week</li>
-                            <li>Montly</li>
+                            <li onClick={() => repeatSettingHandler(0)}>Day (Default)</li>
+                            <li onClick={() => repeatSettingHandler(1)}>Every Other Day</li>
+                            <li onClick={() => repeatSettingHandler(6)}>Weekly</li>
+                            <li onClick={() => repeatSettingHandler(13)}>Every Other Week</li>
+                            <li onClick={() => repeatSettingHandler(29)}>Montly</li>
                         </ContextMenu>
                 :null}
                 </React.Fragment> : null }

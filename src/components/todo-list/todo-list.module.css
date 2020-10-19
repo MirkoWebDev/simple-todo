@@ -4,6 +4,10 @@
     margin: 0 auto;
 }
 
+.TodoWrapper ul{
+    padding: 0;
+}
+
 .CompletedButton{
     padding: 10px 20px;
     background-color: #0077b6;

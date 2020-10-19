@@ -32,6 +32,7 @@ let completed = state.list.filter(el => el.completed).map(el =>
                     detailCall={() => {actvitiDetailHandler(el.id)}}
                 />
     );
+
     return(
         <div className={classes.TodoWrapper}>
             <ul>
@@ -64,6 +65,7 @@ let completed = state.list.filter(el => el.completed).map(el =>
                 </div>
                 
                 : null}
+
             
         </div>
     )
