@@ -10,16 +10,7 @@ const [state, dispatch] = useStore();
 const [showCompleted, setShowCompleted] = useState(true);
 
 const actvitiDetailHandler = id =>{
-    if (state.activityID) {
-        if (state.activityID === id) {
-            dispatch('TOGGLE_DETAILS');
-        } else {
-            dispatch('ACTIVITY_DETAIL',id);
-        }
-    } else {
-        dispatch('ACTIVITY_DETAIL',id);
-        dispatch('TOGGLE_DETAILS');
-    }
+    dispatch('ACTIVITY_DETAIL', id);
 }
 
 let completed = state.list.filter(el => el.completed).map(el => 

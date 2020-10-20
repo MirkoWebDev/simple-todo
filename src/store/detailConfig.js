@@ -5,11 +5,11 @@ const configureDetailStore = () => {
     
 const actions = {
     ACTIVITY_DETAIL:(curState, activityId) =>{
-        return { activityID:activityId}
-    },
-    TOGGLE_DETAILS:(curState) => {
-        const newState = !curState.detailsVisible;
-        return{detailsVisible: newState}
+       let newDetailStatus = true;
+        if(curState.activityID === activityId || !activityId){
+            newDetailStatus = false;
+        }
+        return { activityID:activityId,detailsVisible:newDetailStatus}
     }
 }
 

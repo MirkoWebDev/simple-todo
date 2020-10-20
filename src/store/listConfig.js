@@ -20,7 +20,7 @@ const configureStore = () => {
                 completed: newCompletedStatus,
                 completedDate: newCompletedDate
             };
-            localStorage.setItem('todo', JSON.stringify(updatedProducts));
+               localSave(updatedProducts);
 
             return { list: updatedProducts }
         },
@@ -29,9 +29,11 @@ const configureStore = () => {
             const newList = curState.list.filter(
                 el => el.id !== elementId
             );
-            localStorage.setItem('todo', JSON.stringify(newList));
 
-            return { list: newList }
+            localSave(newList);
+
+
+            return { list: newList, activityID:null }
         },
         ADD_ACTIVITY:(curState, activityData) => {
             const newId = uuid();
@@ -49,6 +51,20 @@ const configureStore = () => {
             localStorage.setItem('todo',JSON.stringify(newList));
             return {list:newList}
         },
+        SET_NAME: (curState, activityData) => {
+            const newList = [...curState.list];
+            const index = curState.list.findIndex(el => el.id === activityData.id);
+
+            newList[index] = {
+                ...curState.list[index],
+                title: activityData.title
+            }
+            
+            localSave(newList);
+
+
+            return { list: newList }
+        },
         SET_REPEAT: (curState, activityData) => {
             const newList = [...curState.list];
             const index = curState.list.findIndex(el => el.id === activityData.id);
@@ -57,6 +73,9 @@ const configureStore = () => {
                 ...curState.list[index],
                 repeat:activityData.repeat
             }
+            
+            localSave(newList);
+
             return{list:newList}
         },
         SET_NOTE: (curState, activityData) => {
@@ -67,8 +86,15 @@ const configureStore = () => {
                 ...curState.list[index],
                 note:activityData.note
             }
+
+            localSave(newList);
+
             return{list:newList}
         }
+    }
+
+    const localSave = item => {
+        localStorage.setItem('todo', JSON.stringify(item));
     }
 
     const loadedList = localStorage.getItem('todo');

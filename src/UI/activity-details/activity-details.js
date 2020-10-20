@@ -10,27 +10,52 @@ const ActivityDetails = props => {
     const [state,dispatch] = useStore();
     const activitySelected = state.list[state.list.findIndex(el => el.id === state.activityID)];
     const [repeatContext, setRepeatContext] = useState(false);
+    const [renameContext, setRenameContext] = useState(false);
+    const [newActivityName, setNewActivityName] = useState('');
     const [note, setNote] = useState(null)
     let menuRepeatText = 'Repeat';
 
     const deleteActivityHandler = () =>{
-        dispatch('TOGGLE_DETAILS');
         dispatch('TOGGLE_MODAL');
+    }
+
+    const contextMenuCoordinates = (event) => {
+        const xPos = "10%";
+        const yPos = (event.pageY + 13) + "px";
+        console.log('x:' + xPos + ' y: ' + yPos);
+        dispatch('SET_CONTEXT_COORDINATES', { x: xPos, y: yPos });
     }
 
 
     const repeatContextHandler = (event) => {
-        const xPos = "10%";
-        const yPos = (event.pageY+13) + "px";
-        console.log('x:' + xPos + ' y: ' + yPos);
-        dispatch('SET_CONTEXT_COORDINATES', { x: xPos, y: yPos });
+        contextMenuCoordinates(event);
         setRepeatContext(true);
+    }
+
+    const renameActivityContext = (event) => {
+        contextMenuCoordinates(event);
+        setRenameContext(true);
+    }
+    const newNameHandler = () => {
+        dispatch('SET_NAME', { id: activitySelected.id, title: newActivityName })
+        setRenameContext(false);
     }
 
     const repeatSettingHandler = repeatData => {
         dispatch('SET_REPEAT',{id:activitySelected.id, repeat:repeatData});
         setRepeatContext(false);
     }
+
+    const noteChangeHandler = (e) =>{
+        setNote(e.target.value);
+    }
+
+    const noteSaveHandler = () => {
+        dispatch('SET_NOTE', {id:activitySelected.id, note:note});
+
+    }
+
+
 
     const repeatSettingText = () => {
         switch (activitySelected.repeat) {
@@ -46,17 +71,12 @@ const ActivityDetails = props => {
             case 29:
                 menuRepeatText = 'Repeat every month';
                 break;
-            default: 
+            default:
                 menuRepeatText = 'Repeat';
                 break;
         }
     }
-
-    const noteHandler = (e) =>{
-        setNote(e.target.value);
-    }
-
-    if(activitySelected &&activitySelected.repeat){
+    if (activitySelected && activitySelected.repeat) {
         repeatSettingText();
     }
 
@@ -83,11 +103,18 @@ const ActivityDetails = props => {
                                     <span className="material-icons">history</span>
                                     {menuRepeatText}
                                 </li>
-                                <li>Rename</li>
-                                <li>Delete</li>
+                                <li onClick={renameActivityContext}> <span className="material-icons">create</span>Rename</li>
+                                <li onClick={deleteActivityHandler}><span className="activityDeleter material-icons">delete_outline</span>Delete</li>
                             </span>
                             <span className={menuClasses.MenuListGroup}>
-                                <textarea maxLength="250" placeholder="Add Note..." defaultValue={activitySelected.note? activitySelected.note:null} onChange={noteHandler}/>
+                                <textarea maxLength="250" rows="10" placeholder="Add Note..." defaultValue={activitySelected.note? activitySelected.note:null} onChange={noteChangeHandler}/>
+                                {note? 
+                                    <button className="saveBtn" onClick={noteSaveHandler}>
+                                        <span className="material-icons" >Save</span>
+                                         Save
+                                    </button>
+                                :null}
+                                
                             </span>
                         </ul>
                     </div>
@@ -103,10 +130,21 @@ const ActivityDetails = props => {
                             <li onClick={() => repeatSettingHandler(29)}>Montly</li>
                         </ContextMenu>
                 :null}
-                </React.Fragment> : null }
 
-                <span className="activityDeleter material-icons" onClick={deleteActivityHandler}>delete_outline</span>
-                <span className="activityCloser material-icons" onClick={() => { dispatch('TOGGLE_DETAILS'); }}>keyboard_arrow_left</span>
+
+                {renameContext? 
+                    <ContextMenu closing={()=>{setRenameContext(false)}}>
+                        <input 
+                            type="text" 
+                            placeholder="New Activity Name" 
+                            value={newActivityName} 
+                            onChange={(event) => {setNewActivityName(event.target.value)}}
+                        />
+                        <button onClick={newNameHandler}>Set Name</button>
+                    </ContextMenu>
+                :null}
+                </React.Fragment> : null }
+                <span className="activityCloser material-icons" onClick={() => { dispatch('ACTIVITY_DETAIL', null); }}>keyboard_arrow_left</span>
             </div>
         </div>
        

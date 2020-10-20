@@ -6,7 +6,6 @@
     width: 100vw;
     z-index: 9;
 }
-
 .ContextualMenu{
     position: absolute;
     top: 0;
@@ -16,6 +15,7 @@
     max-width: 400px;
     border-radius: 7px;
     box-shadow: -5px 5px 5px rgba(0,0,0,0.5);
+    background-color: rgba(255, 255, 255, 0.97);
     z-index: 10;
 }
 .ContextualMenu ul{
@@ -24,6 +24,9 @@
     margin: 0;
     border: 1px solid #E0E0E0;
     border-radius: 7px;
+}
+.ContextualMenu button, .ContextualMenu input{
+    margin: 10px 0;
 }
 .ContextualMenu li{
     background-color: rgba(255, 255, 255, 0.97);
@@ -42,4 +45,11 @@
 }
 .ContextualMenu li:hover{
     background-color: #EBEBEB;
+}
+
+.ContextualMenu button{
+    color: white;
+    border: none;
+    background-color: #007bff;
+    padding: 3px 7px;
 }

@@ -23,7 +23,7 @@
   right: 0;
 }
 
-.activityCloser,.activityDeleter{
+.activityCloser{
     position: absolute;
     bottom: 10px;
     left: 5px;
@@ -31,7 +31,7 @@
     font-size: 200%;
     cursor: pointer;
 }
-.activityCloser:hover,.activityDeleter:hover{
+.activityCloser:hover{
   background-color: rgba(240, 240, 240, 1);
 }
 .activityDeleter{
@@ -168,6 +168,12 @@
   100% {
     transform: scale(1);
   }
+}
+
+
+.saveBtn{
+  color: white;
+  background-color: #007bff;
 }
 
 
