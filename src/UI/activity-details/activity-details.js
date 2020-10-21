@@ -12,7 +12,7 @@ const ActivityDetails = props => {
     const [repeatContext, setRepeatContext] = useState(false);
     const [renameContext, setRenameContext] = useState(false);
     const [newActivityName, setNewActivityName] = useState('');
-    const [note, setNote] = useState(null)
+    const [note, setNote] = useState('')
     let menuRepeatText = 'Repeat';
 
     const deleteActivityHandler = () =>{
@@ -37,8 +37,22 @@ const ActivityDetails = props => {
         setRenameContext(true);
     }
     const newNameHandler = () => {
-        dispatch('SET_NAME', { id: activitySelected.id, title: newActivityName })
-        setRenameContext(false);
+        if(newActivityName!==''){
+            dispatch('SET_NAME', { id: activitySelected.id, title: newActivityName })
+            setRenameContext(false);
+            setNewActivityName('');
+        } 
+    }
+
+    const onNewNameKeyPress = event => {
+        if (event.key === 'Enter') {
+            newNameHandler();
+        }
+    }
+    const onNewNoteKeyPress = event => {
+        if (event.key === 'Enter') {
+            noteSaveHandler();
+        }
     }
 
     const repeatSettingHandler = repeatData => {
@@ -52,13 +66,16 @@ const ActivityDetails = props => {
 
     const noteSaveHandler = () => {
         dispatch('SET_NOTE', {id:activitySelected.id, note:note});
-
+        dispatch('CALL_NOTIFICATION', 'Note Saved');
     }
 
 
 
     const repeatSettingText = () => {
         switch (activitySelected.repeat) {
+            case 0:
+                menuRepeatText = 'Repeat every day';
+                break;
             case 1:
                 menuRepeatText = 'Repeat every other day';
                 break;
@@ -82,7 +99,7 @@ const ActivityDetails = props => {
 
 
     return(
-        <div className={`detailsWrapper ${state.detailsVisible? "visible" : null}`}>
+        <div className={`detailsWrapper ${state.activityID? "visible" : null}`}>
             <div className="details">
                 {activitySelected ? <React.Fragment>
 
@@ -107,11 +124,17 @@ const ActivityDetails = props => {
                                 <li onClick={deleteActivityHandler}><span className="activityDeleter material-icons">delete_outline</span>Delete</li>
                             </span>
                             <span className={menuClasses.MenuListGroup}>
-                                <textarea maxLength="250" rows="10" placeholder="Add Note..." defaultValue={activitySelected.note? activitySelected.note:null} onChange={noteChangeHandler}/>
+                                <textarea 
+                                maxLength="250" 
+                                rows="10" 
+                                placeholder="Add Note..." 
+                                defaultValue={activitySelected.note? activitySelected.note:''} 
+                                value={note}
+                                onChange={noteChangeHandler}
+                                onKeyPress={onNewNoteKeyPress}/>
                                 {note? 
                                     <button className="saveBtn" onClick={noteSaveHandler}>
-                                        <span className="material-icons" >Save</span>
-                                         Save
+                                         Save note
                                     </button>
                                 :null}
                                 
@@ -139,6 +162,7 @@ const ActivityDetails = props => {
                             placeholder="New Activity Name" 
                             value={newActivityName} 
                             onChange={(event) => {setNewActivityName(event.target.value)}}
+                            onKeyPress={onNewNameKeyPress}
                         />
                         <button onClick={newNameHandler}>Set Name</button>
                     </ContextMenu>

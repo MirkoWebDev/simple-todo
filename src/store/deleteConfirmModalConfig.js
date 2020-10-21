@@ -7,10 +7,14 @@ const configureModal = () => {
         TOGGLE_MODAL: (curState) => {
             const newState = !curState.modalVisible;
             return { modalVisible: newState }
+        },
+        DELETE_ID: (curState, id) => {
+            
+            return { deleteID: id }
         }
     }
 
-    initStore(actions, { modalVisible:false});
+    initStore(actions, { modalVisible:false, deleteID: null});
 
 }
 

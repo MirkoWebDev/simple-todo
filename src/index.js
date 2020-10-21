@@ -7,12 +7,15 @@ import configList from './store/listConfig';
 import configDetail from './store/detailConfig';
 import configContext from './store/contextMenuConfig';
 import configDeleteModal from './store/deleteConfirmModalConfig';
+import configureNotification from './store/notificationConfing';
 
 
 configList();
 configDetail();
 configContext();
 configDeleteModal();
+configureNotification();
+
 
 ReactDOM.render(
   <React.StrictMode>

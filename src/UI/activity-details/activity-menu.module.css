@@ -36,3 +36,13 @@
   max-width: 350px;
   margin: 0 auto;
 }
+
+.MenuList button{
+    display: block;
+    color: white;
+    border: none;
+    background-color: #007bff;
+    padding: 5px 10px;
+    margin: 10px auto;
+    font-size: 110%;
+}

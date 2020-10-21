@@ -14,7 +14,7 @@ const toggleCompletedHandler = () => {
 }
 const toggleDeleteHandler = () => {
     setShowContext(false);
-    dispatch('ACTIVITY_DETAIL', props.id);
+    dispatch('DELETE_ID', props.id);
     dispatch('TOGGLE_MODAL');
 }
 const contextHandler = (event) => {

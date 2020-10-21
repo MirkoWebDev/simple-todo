@@ -5,15 +5,15 @@ const configureDetailStore = () => {
     
 const actions = {
     ACTIVITY_DETAIL:(curState, activityId) =>{
-       let newDetailStatus = true;
-        if(curState.activityID === activityId || !activityId){
-            newDetailStatus = false;
+       let newDetailID = null;
+        if(curState.activityID !== activityId){
+            newDetailID = activityId;
         }
-        return { activityID:activityId,detailsVisible:newDetailStatus}
+        return { activityID:newDetailID}
     }
 }
 
-    initStore(actions, { activityID:null,detailsVisible:false});
+    initStore(actions, { activityID:null});
 
 }
 
