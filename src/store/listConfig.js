@@ -35,6 +35,13 @@ const configureStore = () => {
 
             return { list: newList, activityID:null }
         },
+        DELETE_COMPLETED: (curState) => {
+            const newList = curState.list.filter(
+                el => !el.completed || el.repeat!==null
+            );
+            localSave(newList);
+            return{list:newList}
+        },
         ADD_ACTIVITY:(curState, activityData) => {
             const newId = uuid();
             const newElement = {
@@ -103,38 +110,22 @@ const configureStore = () => {
     IF there is data saved on the local storage, load that : ELSE load starting list 
     IF any activity is saved as completed check IF completed date is < Current Date IF is, set completed as false, set completed date as null*/
 
+
+
+    
     if(loadedList){
         const currDate = new Date();
         const currFullDate = currDate.getFullYear() + '-' + currDate.getMonth() + '-' + currDate.getDate();
         const parsedList = JSON.parse(loadedList);
         for (let le of parsedList){
             if(le.completed){
-                console.log(le.title + ' is Completed check START:');
-                if(le.repeat!==0){
-                    console.log(le.title + ' has repeat of: ' + le.repeat);
+
+                if(le.repeat!==null){
                     let dateRepeat = new Date(le.completedDate);
-                    console.log('Set new Repeat Date: '+dateRepeat);
                     dateRepeat.setDate(dateRepeat.getDate() + le.repeat);
                     dateRepeat.setMonth(dateRepeat.getMonth() + 1);
-                    console.log('Added repeat day and Ajusted Month: '+dateRepeat);
                    const newDateRepeat = dateRepeat.getFullYear() + '-' + dateRepeat.getMonth() + '-' + dateRepeat.getDate();
-                    console.log(le.title +' REPEAT date is: ' + newDateRepeat);
-                    console.log(le.title +' FULL date is: ' + currFullDate);
                     if (newDateRepeat < currFullDate){
-                        console.log(le.title + ' Set To Reset');
-                        const index = parsedList.indexOf(le);
-                        parsedList[index] = {
-                            ...parsedList[index],
-                            completed: false,
-                            completedDate: null
-                        }
-                    }
-                }else{
-                    console.log(le.title + ' has no repeat');
-                    if(le.completedDate < currFullDate){
-                        console.log(le.title + ' Set To Reset');
-                        console.log(le.title + ' Repeat date is set To ' + le.completedDate);
-                        console.log('Current full date is: ' + currFullDate);
                         const index = parsedList.indexOf(le);
                         parsedList[index] = {
                             ...parsedList[index],
@@ -143,7 +134,6 @@ const configureStore = () => {
                         }
                     }
                 }
-                console.log(le.title + ' CHECK END');
             }
         }
         initStore(actions, {list:parsedList});
@@ -162,18 +152,18 @@ const configureStore = () => {
             list: [
                 {
                     id: uuid(),
-                    title: 'Study React',
+                    title: 'Test To Do List',
                     completed: false,
                     completedDate: null,
-                    repeat:0,
+                    repeat:null,
                     note:null
                 },
                 {
                     id: uuid(),
-                    title: 'Send Resume',
+                    title: 'Enjoy To Do List',
                     completed: false,
                     completedDate: null,
-                    repeat:0,
+                    repeat:null,
                     note:null                         
                 },
                 {
@@ -181,7 +171,7 @@ const configureStore = () => {
                     title: 'Buy More Coffee',
                     completed: false,
                     completedDate: null,
-                    repeat:0,
+                    repeat:null,
                     note:null
                 },
                 {
@@ -189,7 +179,7 @@ const configureStore = () => {
                     title: 'Destroy My Enemies',
                     completed: false,
                     completedDate: null,
-                    repeat:0,
+                    repeat:null,
                     note:null
                 }
             ]

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useStore} from '../../hooks/hook-store';
 
 import ContextMenu from '../contextual-menu/contextual-menu';
@@ -14,6 +14,15 @@ const ActivityDetails = props => {
     const [newActivityName, setNewActivityName] = useState('');
     const [note, setNote] = useState('')
     let menuRepeatText = 'Repeat';
+
+
+    useEffect(() => {
+        if(activitySelected && activitySelected.note){
+            setNote(activitySelected.note)
+        }else{
+            setNote('');
+        }
+    }, [activitySelected])
 
     const deleteActivityHandler = () =>{
         dispatch('TOGGLE_MODAL');
@@ -128,7 +137,6 @@ const ActivityDetails = props => {
                                 maxLength="250" 
                                 rows="10" 
                                 placeholder="Add Note..." 
-                                defaultValue={activitySelected.note? activitySelected.note:''} 
                                 value={note}
                                 onChange={noteChangeHandler}
                                 onKeyPress={onNewNoteKeyPress}/>
@@ -146,7 +154,7 @@ const ActivityDetails = props => {
 
                 {repeatContext? 
                         <ContextMenu closing={() => { setRepeatContext(false) }}>
-                            <li onClick={() => repeatSettingHandler(0)}>Day (Default)</li>
+                            <li onClick={() => repeatSettingHandler(0)}>Every Day</li>
                             <li onClick={() => repeatSettingHandler(1)}>Every Other Day</li>
                             <li onClick={() => repeatSettingHandler(6)}>Weekly</li>
                             <li onClick={() => repeatSettingHandler(13)}>Every Other Week</li>

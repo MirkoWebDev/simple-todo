@@ -9,9 +9,18 @@ const TodoList = props => {
 const [state, dispatch] = useStore();
 const [showCompleted, setShowCompleted] = useState(true);
 
+
+
 const actvitiDetailHandler = id =>{
     dispatch('ACTIVITY_DETAIL', id);
 }
+
+const toggleDeleteHandler = () => {
+    dispatch('DELETE_ID', null);
+    dispatch('TOGGLE_MODAL');
+}
+
+
 
 let completed = state.list.filter(el => el.completed).map(el => 
                 <TodoElement
@@ -20,6 +29,7 @@ let completed = state.list.filter(el => el.completed).map(el =>
                     title={el.title}
                     duration={el.duration}
                     completed={el.completed}
+                    repeat={el.repeat}
                     detailCall={() => {actvitiDetailHandler(el.id)}}
                 />
     );
@@ -35,6 +45,7 @@ let completed = state.list.filter(el => el.completed).map(el =>
                                 title={el.title}
                                 duration={el.duration}
                                 completed={el.completed}
+                                repeat={el.repeat}
                                 detailCall={() => { actvitiDetailHandler(el.id)}}
                             />
  
@@ -44,11 +55,12 @@ let completed = state.list.filter(el => el.completed).map(el =>
                 {completed.length > 0? 
                 
                 <div>
-                    <button className={classes.CompletedButton} onClick={()=>{setShowCompleted(!showCompleted)}}>
+                    <button className={classes.CompletedButton} onClick={() => { setShowCompleted(!showCompleted) }} >
                         <span className={`material-icons ${classes.Arrow} ${showCompleted? classes.ArrowTurn:null}`}>
                             keyboard_arrow_right
                         </span> 
                         Completed</button>
+                        <button onClick={toggleDeleteHandler}><span className="material-icons">delete</span></button>
 
                     <ul className={`${classes.CompletedList} ${showCompleted? classes.ListActive:null}`}>
                         {completed}
@@ -57,7 +69,6 @@ let completed = state.list.filter(el => el.completed).map(el =>
                 
                 : null}
 
-            
         </div>
     )
 }

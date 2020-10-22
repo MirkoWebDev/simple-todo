@@ -10,7 +10,7 @@ import './add-todo.css';
 const AddTodo = props => {
 const  dispatch = useStore(false)[1];
 const [activtyName, setActivtyName] = useState('');
-const [repeat, setRepeat] = useState(0);
+const [repeat, setRepeat] = useState(null);
 const [repeatMenuVisible, setRepeatMenuVisible] = useState(false);
 
 const onKeyPress = event => {
@@ -70,7 +70,7 @@ const contextRepeatSettingHandler = (event) => {
             </div>
             { repeatMenuVisible? 
                 <ContextMenu closing={() => setRepeatMenuVisible(false)}>
-                    <li onClick={() => repeatSettingHandler(0)}>Every Day (Default)</li>
+                    <li onClick={() => repeatSettingHandler(0)}>Every Day</li>
                     <li onClick={() => repeatSettingHandler(1)}>Every Other Day</li>
                     <li onClick={() => repeatSettingHandler(6)}>Once A Week</li>
                     <li onClick={() => repeatSettingHandler(13)}>Once Every Two Weeks</li>

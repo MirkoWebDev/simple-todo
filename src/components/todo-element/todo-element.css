@@ -46,3 +46,17 @@
 .todoElement .check.completed:after {
 border-width: 20px;
 }
+
+.repeatText{
+    position: absolute;
+    right: 10px;
+    font-weight: 100;
+    color: rgba(0,123,255,0.5);
+    font-size: 80%;
+}
+
+.repeatText .material-icons{
+    font-weight: lighter;
+    font-size: 18px;
+    padding-left: 4px;
+}
