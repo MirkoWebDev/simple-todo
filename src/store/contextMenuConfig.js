@@ -10,8 +10,12 @@ const configureMenu = () => {
             return { contextID: newID }
         },
         SET_CONTEXT_COORDINATES: (curState,coordinates) => {
-    
-            return { contextCoordinates: {xPos:coordinates.x,yPos:coordinates.y} }
+            if(window.innerWidth>600){
+                return { contextCoordinates: { xPos: coordinates.x, yPos: coordinates.y } }
+            }else{
+                return { contextCoordinates: { xPos: '50%', yPos: '50%' } }
+
+            }
         }
     }
 

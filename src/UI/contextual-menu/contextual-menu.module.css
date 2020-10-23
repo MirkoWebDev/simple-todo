@@ -53,3 +53,12 @@
     background-color: #007bff;
     padding: 3px 7px;
 }
+
+@media screen and (max-width: 600px){
+    .ContextualMenuWrapper{
+        background-color: rgba(0,0,0,0.5);
+    }
+    .ContextualMenu{
+        transform: translate(-50%, -50%);
+    }
+}

@@ -23,7 +23,7 @@ const Notification = () => {
     return(
         <div className={notificationClasses.join(' ')}>
             <span className="material-icons">error_outline</span>
-            <span>{state.notificationText}</span>
+            <span className={classes.NotificationText}>{state.notificationText}</span>
         </div>
     )
 

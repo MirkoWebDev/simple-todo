@@ -60,7 +60,7 @@ let completed = state.list.filter(el => el.completed).map(el =>
                             keyboard_arrow_right
                         </span> 
                         Completed</button>
-                        <button onClick={toggleDeleteHandler}><span className="material-icons">delete</span></button>
+                        <button className={classes.DeleteCompleted} onClick={toggleDeleteHandler}><span className="material-icons">delete_outline</span></button>
 
                     <ul className={`${classes.CompletedList} ${showCompleted? classes.ListActive:null}`}>
                         {completed}

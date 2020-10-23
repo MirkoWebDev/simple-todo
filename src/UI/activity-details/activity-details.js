@@ -31,7 +31,6 @@ const ActivityDetails = props => {
     const contextMenuCoordinates = (event) => {
         const xPos = "10%";
         const yPos = (event.pageY + 13) + "px";
-        console.log('x:' + xPos + ' y: ' + yPos);
         dispatch('SET_CONTEXT_COORDINATES', { x: xPos, y: yPos });
     }
 

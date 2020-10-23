@@ -31,3 +31,22 @@
 .CompletedList.ListActive{
     display: block;
 }
+
+.DeleteCompleted{
+    height: 46px;
+    width: 46px;
+    margin-left: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.9);
+    background-color: white;
+    color: indianred;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.DeleteCompleted:hover{
+    background-color: indianred;
+    border-color: indianred;
+    color: white;
+}
