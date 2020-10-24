@@ -30,7 +30,8 @@ const addActivityHander = () => {
             completedDate: null,
             repeat: repeat
         });
-        setRepeat(0);
+        setRepeat(null);
+        dispatch('CALL_NOTIFICATION', `"${activtyName}" has been added to the list`);
     }
 }
 

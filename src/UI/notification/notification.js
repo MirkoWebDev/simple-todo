@@ -12,6 +12,7 @@ const Notification = () => {
 
    notificationClasses.push(classes.Notification);
 
+
    if(state.notificationText){
        notificationClasses.push(classes.Active);
        const timer = setTimeout(() => {

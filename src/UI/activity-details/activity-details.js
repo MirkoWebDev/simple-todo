@@ -25,6 +25,7 @@ const ActivityDetails = props => {
     }, [activitySelected])
 
     const deleteActivityHandler = () =>{
+        dispatch('DELETE_ID', activitySelected.id);
         dispatch('TOGGLE_MODAL');
     }
 
