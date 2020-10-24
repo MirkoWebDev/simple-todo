@@ -106,12 +106,6 @@ const configureStore = () => {
 
     const loadedList = localStorage.getItem('todo');
 
-    /* Configuring the list of activites:
-    IF there is data saved on the local storage, load that : ELSE load starting list 
-    IF any activity is saved as completed check IF completed date is < Current Date IF is, set completed as false, set completed date as null*/
-
-
-
     
     if(loadedList){
         const currDate = new Date();
@@ -139,15 +133,6 @@ const configureStore = () => {
         initStore(actions, {list:parsedList});
     }else{
 
-        /*initialize basic Todo list (array of objects)
-
-        each object in list contains:
-        id: unique Id created with UUID,
-        title: The name of the to do element,
-        completed: The element has been marked as completed?,
-        completedDate: when the element has been marked as completed,
-        repeat: how often the Todo should be repeated default is everyday
-        */
         initStore(actions, {
             list: [
                 {

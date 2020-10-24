@@ -149,8 +149,6 @@ const ActivityDetails = props => {
                             </span>
                         </ul>
                     </div>
-                        
-                <p>Expiration {activitySelected.duration}</p>
 
                 {repeatContext? 
                         <ContextMenu closing={() => { setRepeatContext(false) }}>
