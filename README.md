@@ -8,10 +8,10 @@ In the project, I use Hooks instead of Redux to handle the state and dispatch fu
 
 
 ## Screenshots
-<img src="screenshots/Todo1.png" alt="To Do list image" style="heigth:350px;"/>
-<img src="screenshots/todo2.png" alt="To Do list image" style="heigth:350px;"/>
-<img src="screenshots/todo3.png" alt="To Do list image" style="heigth:350px;"/>
-<img src="screenshots/todo4.png" alt="To Do list image" style="heigth:350px;"/>
+<img src="screenshots/Todo1.png" alt="To Do list image" style="height:350px;"/>
+<img src="screenshots/todo2.png" alt="To Do list image" style="height:350px;"/>
+<img src="screenshots/todo3.png" alt="To Do list image" style="height:350px;"/>
+<img src="screenshots/todo4.png" alt="To Do list image" style="height:350px;"/>
 
 
 ## Built With
